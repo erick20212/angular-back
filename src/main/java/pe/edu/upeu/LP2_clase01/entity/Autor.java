@@ -3,6 +3,8 @@ package pe.edu.upeu.LP2_clase01.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,9 +34,12 @@ public class Autor {
 	private String apellidos;
 	@Column(name="pais")
 	private String pais;
+	@Column(name="foto",length = 250)
+	private String foto;
 	@Column(name="estado")
 	private char estado;
 	
 	@ManyToMany(mappedBy = "autores")
+	@JsonIgnore
 	private Set<Libro> books = new HashSet<>();
 }

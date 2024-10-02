@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,9 @@ import pe.edu.upeu.LP2_clase01.entity.Libro;
 import pe.edu.upeu.LP2_clase01.service.LibroService;
 
 @RestController
+
 @RequestMapping("/api/libros")
+@CrossOrigin(origins="http://localhost:4200")
 public class LibroController {
 	@Autowired
 	private LibroService libroService;
@@ -77,9 +80,10 @@ public class LibroController {
 
 			Optional<Libro> c = libroService.read(id);
 			if(c.isEmpty()) {
-				return new ResponseEntity<>(libroService.update(cat), HttpStatus.OK);
-			}else {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				
+			}else {
+				return new ResponseEntity<>(libroService.update(cat), HttpStatus.OK);
 			}		
 		
 	}
